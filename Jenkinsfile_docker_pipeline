@@ -1,0 +1,17 @@
+pipeline {
+    agent {
+        label 'docker-slave'
+    }
+    stages {
+        stage('Back-end') {
+            agent {
+                docker-slave { image 'maven:3-alpine' }
+            }
+            steps {
+                sh 'mvn --version'
+            }
+        }
+        
+    }
+}
+
