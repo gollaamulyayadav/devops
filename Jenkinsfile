@@ -14,13 +14,19 @@ pipeline {
         }
         }
         stage ('build image'){
+            steps {
            sh 'docker build -t java_app .'
+            }
         }
         stage('push '){
+            steps{
            sh 'docker push'
       }
+        }
         stage('deploy'){
+            steps{
         sh 'docker run image'
+        }
         }
     }
 }
