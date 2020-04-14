@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+        registry = "amulyayadav/dockerdemo"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+    }
     agent any
     stages {
         stage('Build') { 
@@ -15,20 +20,21 @@ pipeline {
         }
         stage ('build image'){
             steps {
-           sh 'docker build -t java_app .'
+                script{
+                    DockerImage = docker.build registry + ":$Build_Number"
             }
+        }
         }
         stage('push '){
             steps{
-           sh 'docker push'
-      }
-        }
-        stage('deploy'){
-            steps{
-        sh 'docker run image'
-        }
+                Script{
+                    docker.withRegistry('',registryCredential){
+                        dockerImage.push()
+                    }
+                }
+            }
+          
         }
     }
-}
 
-        
+}   
