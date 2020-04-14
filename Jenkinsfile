@@ -28,7 +28,7 @@ pipeline {
         stage('push '){
             steps{
                 Script{
-                    docker.withRegistry('',registryCredential){
+                    docker.withRegistry('amulyayadav/dockerdemo',registryCredential){
                         dockerImage.push()
                     }
                 }
