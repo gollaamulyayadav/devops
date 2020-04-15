@@ -1,40 +1,36 @@
 pipeline {
-    environment {
-        registry = "amulyayadav/dockerdemo"
-        registryCredential = 'dockerhub'
-        dockerImage = ''
+  environment {
+    registry = "amulyayadav/dockerhub"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/gustavoapolinario/microservices-node-example-todo-frontend.git'
+      }
     }
-    agent any
-    stages {
-        stage('Build') { 
-             steps {
-                sh 'mvn clean package'
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
-        }
-        stage('SonarQube analysis') { 
-             steps {
-                withSonarQubeEnv('sonar') { 
-                sh 'mvn sonar:sonar'
-                }
-        }
-        }
-        stage ('build image'){
-            steps {
-                script{
-                    DockerImage = docker.build registry + ":$Build_Number"
-            }
-        }
-        }
-        stage('push '){
-            steps{
-                Script{
-                    docker.withRegistry('amulyayadav/dockerdemo',registryCredential){
-                        dockerImage.push()
-                    }
-                }
-            }
-          
-        }
+      }
     }
-
-}   
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
+  }
+}
