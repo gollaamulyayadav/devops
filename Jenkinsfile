@@ -5,12 +5,12 @@ pipeline {
     dockerImage = ''
   }
   agent any
-  stages {
-    stage('Build') { 
-             steps {
-                sh 'mvn clean package'
-        }
-        }
+  //stages {
+    //stage('Build') { 
+      //       steps {
+        //        sh 'mvn clean package'
+        //}
+        //}
         stage('SonarQube analysis') { 
              steps {
                 withSonarQubeEnv('sonar') { 
@@ -18,11 +18,7 @@ pipeline {
                 }
         }
         }
-    //stage('Cloning Git') {
-      //steps {
-        //git 'https://github.com/gollaamulyayadav/devops.git'
-      //}
-    //}
+    
     stage('Building image') {
       steps{
         script {
