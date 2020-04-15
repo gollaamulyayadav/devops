@@ -6,11 +6,11 @@ pipeline {
   }
   agent any
   stages {
-    stage('Cloning Git') {
-      steps {
-        git 'https://github.com/gollaamulyayadav/devops.git'
-      }
-    }
+    //stage('Cloning Git') {
+      //steps {
+        //git 'https://github.com/gollaamulyayadav/devops.git'
+      //}
+    //}
     stage('Building image') {
       steps{
         script {
