@@ -5,19 +5,19 @@ pipeline {
     dockerImage = ''
   }
   agent any
-  //stages {
+  stages {
     //stage('Build') { 
       //       steps {
         //        sh 'mvn clean package'
         //}
         //}
-        stage('SonarQube analysis') { 
-             steps {
-                withSonarQubeEnv('sonar') { 
-                sh 'mvn sonar:sonar'
-                }
-        }
-        }
+        //stage('SonarQube analysis') { 
+          //   steps {
+            //    withSonarQubeEnv('sonar') { 
+              //  sh 'mvn sonar:sonar'
+                //}
+        //}
+        //} 
     
     stage('Building image') {
       steps{
