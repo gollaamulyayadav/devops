@@ -17,6 +17,7 @@ pipeline {
                 sh 'mvn sonar:sonar'
                 }
         }
+        }
     //stage('Cloning Git') {
       //steps {
         //git 'https://github.com/gollaamulyayadav/devops.git'
