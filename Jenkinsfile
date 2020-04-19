@@ -11,14 +11,14 @@ pipeline {
                sh 'mvn package'
         }
         }
-       stage('SonarQube analysis') { 
-             steps {
-                withSonarQubeEnv('sonar') { 
-                sh 'mvn sonar:sonar'
-                }
-        }
-        } 
-    
+     //stage('SonarQube analysis') { 
+       //      steps {
+         //       withSonarQubeEnv('sonar') { 
+           //     sh 'mvn sonar:sonar'
+             //   }
+        //}
+        //} 
+   
     stage('Building image') {
       steps{
         script {
