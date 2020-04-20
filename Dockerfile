@@ -5,9 +5,10 @@
 //RUN sleep 30
 //RUN sh /usr/local/tomcat/bin/catalina.sh start
 FROM java:8  
-COPY . /var/www/java  
+COPY sample.java /var/www/java  
+COPY 
 WORKDIR /var/www/java  
 RUN javac Hello.java  
-CMD ["java", "Hello"] 
+//CMD ["java", "Hello"] 
 
 
