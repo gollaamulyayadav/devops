@@ -1,7 +1,7 @@
 
 FROM java:8  
-COPY sample.java /var/www/java  
-COPY target/grants.war /var/www/java
+COPY sample.java /usr/local/java  
+COPY target/grants.war /usr/local/java
 RUN javac sample.java  
 
 
