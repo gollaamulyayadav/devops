@@ -19,13 +19,13 @@ pipeline {
         }
         }
    
-    //stage('Building image') {
-      //steps{
-        //script {
-          //dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        //}
-     //}
-    //}
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+     }
+    }
     //stage('Deploy Image') {
       //steps{
         //script {
